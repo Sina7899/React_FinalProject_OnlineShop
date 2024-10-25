@@ -36,6 +36,7 @@ export default [
         "warn",
         { extensions: [".js", ".jsx", ".tsx", ".ts"] },
       ],
+      "no-undef": "off",
     },
   },
 ];

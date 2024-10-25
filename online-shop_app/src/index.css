@@ -1,3 +1,8 @@
+/* TAILWIND’S BASE STYLES */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* GLOBAL STYLES & VARIABLES */
 * {
   margin: 0;

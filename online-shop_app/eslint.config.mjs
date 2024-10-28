@@ -29,7 +29,7 @@ export default [
       // Basic ESLint and TypeScript rules
       ...pluginJs.configs.recommended.rules,
       ...tsPlugin.configs.recommended.rules,
-      "no-console": "error",
+      "no-console": "warn",
       // React rules without implicit "extends"
       "react/react-in-jsx-scope": "off",
       "react/jsx-filename-extension": [

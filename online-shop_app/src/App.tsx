@@ -1,5 +1,11 @@
+import MainPage from "./pages/MainPage";
+
 function App() {
-  return <div>Develop soon...</div>;
+  return (
+    <>
+      <MainPage />
+    </>
+  );
 }
 
 export default App;

@@ -21,6 +21,17 @@ const CLASSES: ClassesStructure = {
     Cart_span: "font-bold",
     Cart_count_div:
       "rounded-full w-[25px] h-[25px] bg-CART_COUNT text-white font-bold flex justify-center items-center",
+    main: "sm:px-12 sm:py-12 px-6 py-8 h-screen",
+    main_searchAndCategory_section:
+      "flex flex-col justify-center items-center gap-3 sm:justify-around sm:flex-row",
+    SearchBar_div:
+      "flex rounded-md border border-blue-500 overflow-hidden w-[448px]",
+    SearchBar_input:
+      "w-full outline-none bg-white text-gray-600 text-sm px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition",
+    SearchBar_button: "flex items-center justify-center bg-[#007bff] px-5",
+    SearchBar_svg: "fill-white",
+    CategorySelect_select:
+      "rounded-md border border-blue-500 overflow-hidden w-[448px] px-4 py-[9px] custom-select-downArrow",
   },
   MODAL_PAGE: {},
 };

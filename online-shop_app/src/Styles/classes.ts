@@ -21,7 +21,8 @@ const CLASSES: ClassesStructure = {
       "flex rounded-md border border-blue-500 overflow-hidden w-[448px]",
     SearchBar_input:
       "w-full outline-none bg-white text-gray-600 text-sm px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition",
-    SearchBar_button: "flex items-center justify-center bg-[#007bff] px-5",
+    SearchBar_button:
+      "flex items-center justify-center bg-[#007bff] px-5 cursor-not-allowed",
     SearchBar_svg: "fill-white",
     CategorySelect_select:
       "rounded-md border border-blue-500 overflow-hidden w-[448px] px-4 py-[9px] custom-select-downArrow",

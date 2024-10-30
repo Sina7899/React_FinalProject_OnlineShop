@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useRef, useEffect } from "react";
 
 import useFetch from "../hooks/useFetch";
 
@@ -12,21 +12,31 @@ const OnlineShopContexts = createContext<ContextsObj<Product[]>>({
   data: [],
   setData: () =>
     undefined as unknown as React.Dispatch<React.SetStateAction<Product[]>>,
+  initialFetchedProducts: [],
 });
 
 const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
   const {
     loading,
     error,
-    data: productsInfo,
+    data: products,
     setData: setProducts,
   } = useFetch(fetchProducts, []);
 
+  const initialFetchedProducts = useRef<Product[]>([]);
+
+  useEffect(() => {
+    if (products.length > 0 && initialFetchedProducts.current.length === 0) {
+      initialFetchedProducts.current = [...products];
+    }
+  }, [products]);
+
   const onlineShopCtxValues: ContextsObj<Product[]> = {
-    loading: loading,
-    error: error,
-    data: productsInfo,
+    loading,
+    error,
+    data: products,
     setData: setProducts,
+    initialFetchedProducts: initialFetchedProducts.current,
   };
 
   return (

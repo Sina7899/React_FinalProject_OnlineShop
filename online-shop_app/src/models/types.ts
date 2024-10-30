@@ -41,6 +41,7 @@ interface ContextsObj<T> {
   error: FetchError | null;
   data: T;
   setData: React.Dispatch<React.SetStateAction<T>>;
+  initialFetchedProducts: T;
 }
 
 export type {

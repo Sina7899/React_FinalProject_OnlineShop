@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 
-interface FetchError {
-  message: string;
-}
+import { FetchError } from "../models/types";
 
 function useFetch<T>(fetchFn: () => Promise<T>, initialValue: T) {
-  const [loading, setLoading] = useState<boolean>();
-  const [error, setError] = useState<FetchError | null>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<FetchError | null>(null);
   const [data, setData] = useState<T>(initialValue);
 
   useEffect(() => {

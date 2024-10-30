@@ -1,13 +1,16 @@
 import CLASSES from "../Styles/classes";
 
+import { OnlineShopContextProvider } from "../store/OnlineShop_context";
+
 import NavBar from "../components/NavBar";
 import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import CategorySelect from "../components/CategorySelect";
+import Products from "../components/Products";
 
 const MainPage: React.FC = () => {
   return (
-    <>
+    <OnlineShopContextProvider>
       <header className={CLASSES.MAIN_PAGE.header}>
         <PageTitle />
         <NavBar />
@@ -17,8 +20,11 @@ const MainPage: React.FC = () => {
           <SearchBar />
           <CategorySelect />
         </section>
+        <section>
+          <Products />
+        </section>
       </main>
-    </>
+    </OnlineShopContextProvider>
   );
 };
 

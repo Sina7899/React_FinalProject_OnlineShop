@@ -1,11 +1,4 @@
-interface ComponentClassesStructure {
-  [key: string]: string;
-}
-
-interface ClassesStructure {
-  MAIN_PAGE: ComponentClassesStructure;
-  MODAL_PAGE: ComponentClassesStructure;
-}
+import { ClassesStructure } from "../models/types";
 
 const CLASSES: ClassesStructure = {
   MAIN_PAGE: {
@@ -32,6 +25,22 @@ const CLASSES: ClassesStructure = {
     SearchBar_svg: "fill-white",
     CategorySelect_select:
       "rounded-md border border-blue-500 overflow-hidden w-[448px] px-4 py-[9px] custom-select-downArrow",
+    Products:
+      "grid gap-2 sm:gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-8 sm:py-12 mx-auto w-fit",
+    ProductItem_first_div:
+      "mb-4 sm:mb-0 h-[484px] w-[320px] rounded-md shadow-xl",
+    ProductItem_second_div: "p-5",
+    ProductItem_third_div: "flex justify-between align-center",
+    ProductItem_img:
+      "w-[320px] h-[320px] object-contain rounded-md rounded-b-none",
+    ProductItem_h4: "text-2xl font-semibold mb-2 truncate",
+    ProductItem_p: "italic mb-6 truncate ",
+    ProductItem_first_span: "font-bold",
+    ProductItem_second_span: "text-green-700 underline align-middle",
+    ProductItem_button:
+      "w-auto px-2 py-1 border-solid border border-blue-600 rounded-md text-sm text-blue-600 hover:bg-blue-600 hover:text-white transition",
+    Products_loadingOrError:
+      "block h-screen text-center text-2xl p-52 font-semibold italic",
   },
   MODAL_PAGE: {},
 };

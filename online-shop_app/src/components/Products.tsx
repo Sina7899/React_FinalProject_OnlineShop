@@ -31,6 +31,7 @@ const Products: React.FC = () => {
     <div className={CLASSES.MAIN_PAGE.Products}>
       {productsInfo.map((product: Product) => {
         const productCardInfo = {
+          productId: product.id,
           productImage: product.image,
           productTitle: product.title,
           productDes: product.description,

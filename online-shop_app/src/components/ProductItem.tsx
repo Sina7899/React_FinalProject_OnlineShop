@@ -1,13 +1,31 @@
 import CLASSES from "../Styles/classes";
 
-import { ProductCardInfo } from "../models/types";
+import { useContext } from "react";
+
+import { OnlineShopContexts } from "../store/OnlineShop_context";
+
+import { ProductCardInfo, CartItem } from "../models/types";
 
 const ProductItem: React.FC<ProductCardInfo> = ({
+  productId,
   productImage,
   productTitle,
   productDes,
   productPrice,
 }) => {
+  const { addItem } = useContext(OnlineShopContexts);
+
+  const cartItem: CartItem = {
+    id: productId,
+    name: productTitle,
+    description: productDes,
+    price: productPrice,
+  };
+
+  function handleAddToCart() {
+    addItem(cartItem);
+  }
+
   return (
     <div className={CLASSES.MAIN_PAGE.ProductItem_first_div}>
       <img
@@ -29,6 +47,7 @@ const ProductItem: React.FC<ProductCardInfo> = ({
           </span>
           <button
             type="button"
+            onClick={handleAddToCart}
             className={CLASSES.MAIN_PAGE.ProductItem_button}
           >
             Add to Cart

@@ -12,6 +12,7 @@ interface ShopTitle {
 }
 
 interface ProductCardInfo {
+  productId: number;
   productImage: string;
   productTitle: string;
   productDes: string;
@@ -36,13 +37,29 @@ interface children {
   children?: React.ReactNode;
 }
 
+type CartItem = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  quantity?: number | undefined;
+};
+
 interface ContextsObj<T> {
   loading: boolean;
   error: FetchError | null;
   data: T;
   setData: React.Dispatch<React.SetStateAction<T>>;
   initialFetchedProducts: T;
+  items: CartItem[];
+  addItem: (item: CartItem) => void;
 }
+
+type CartState = {
+  items: CartItem[];
+};
+
+type CartAction = { type: "ADD_ITEM"; item: CartItem };
 
 export type {
   ClassesStructure,
@@ -52,4 +69,7 @@ export type {
   Product,
   children,
   ContextsObj,
+  CartItem,
+  CartState,
+  CartAction,
 };

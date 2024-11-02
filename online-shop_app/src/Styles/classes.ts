@@ -59,6 +59,14 @@ const CLASSES: ClassesStructure = {
       "text-end font-bold py-2 italic border-solid border-t-2 border-black",
     table_tfoot_second_td:
       "font-bold underline text-green-700 text-center py-2 border-solid border-t-2 border-black",
+    table_tbody_count_div_desktop: "flex justify-between items-center",
+    table_tbody_count_div_mobile: "flex justify-around items-center",
+    table_tbody_decrease_icon:
+      "material-symbols-outlined text-base cursor-pointer hover:text-red-600",
+    table_tbody_increase_icon:
+      "material-symbols-outlined text-base cursor-pointer hover:text-blue-600",
+    table_tbody_total_div: "flex justify-end items-center gap-2",
+    empty_card_p: "text-center mt-28 text-red-500 italic font-semibold",
   },
 };
 

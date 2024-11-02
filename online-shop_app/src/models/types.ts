@@ -37,6 +37,14 @@ interface children {
   children?: React.ReactNode;
 }
 
+type CartItemComponentType = {
+  item: CartItemType;
+  index: number;
+  onDecrease: () => void;
+  onIncrease: () => void;
+  onRemove: () => void;
+};
+
 type CartItemType = {
   id: number;
   name: string;
@@ -53,6 +61,7 @@ interface ContextsObj<T> {
   initialFetchedProducts: T;
   items: CartItemType[];
   addItem: (item: CartItemType) => void;
+  removeItem: (id: number, button: string) => void;
   totalCartItems: number;
 }
 
@@ -60,7 +69,15 @@ type CartState = {
   items: CartItemType[];
 };
 
-type CartAction = { type: "ADD_ITEM"; item: CartItemType };
+type CartAction =
+  | { type: "ADD_ITEM"; item: CartItemType }
+  | {
+      type: "REMOVE_ITEM";
+      payload: {
+        id: number;
+        button: string;
+      };
+    };
 
 interface ModalProps {
   children: React.ReactNode;
@@ -89,6 +106,7 @@ export type {
   Product,
   children,
   ContextsObj,
+  CartItemComponentType,
   CartItemType,
   CartState,
   CartAction,

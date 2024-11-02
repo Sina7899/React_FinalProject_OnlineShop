@@ -12,7 +12,8 @@ import { TableDesigns } from "../models/types";
 
 const CartModal: React.FC = () => {
   const { progress, hideCart, screenWidth } = useContext(CartModalContext);
-  const { items } = useContext(OnlineShopContexts);
+  const { items, addItem, removeItem, totalCartItems } =
+    useContext(OnlineShopContexts);
 
   function handleCloseCart() {
     hideCart();
@@ -41,7 +42,16 @@ const CartModal: React.FC = () => {
         </thead>
         <tbody>
           {items.map((item, index) => {
-            return <CartItem item={item} index={index} key={item.id} />;
+            return (
+              <CartItem
+                item={item}
+                index={index}
+                key={item.id}
+                onDecrease={() => removeItem(item.id, "Reduce")}
+                onIncrease={() => addItem(item)}
+                onRemove={() => removeItem(item.id, "Remove")}
+              />
+            );
           })}
         </tbody>
         <tfoot>
@@ -78,13 +88,37 @@ const CartModal: React.FC = () => {
                   {item.name}
                 </td>
                 <td className={CLASSES.MODAL_PAGE.table_tbody_td}>
-                  {`x${item.quantity}`}
+                  <div
+                    className={CLASSES.MODAL_PAGE.table_tbody_count_div_mobile}
+                  >
+                    <span
+                      onClick={() => removeItem(item.id, "Reduce")}
+                      className={CLASSES.MODAL_PAGE.table_tbody_decrease_icon}
+                    >
+                      remove
+                    </span>
+                    {`x${item.quantity}`}
+                    <span
+                      onClick={() => addItem(item)}
+                      className={CLASSES.MODAL_PAGE.table_tbody_increase_icon}
+                    >
+                      add
+                    </span>
+                  </div>
                 </td>
                 <td className={CLASSES.MODAL_PAGE.table_tbody_td}>
                   {item.price}
                 </td>
                 <td className={CLASSES.MODAL_PAGE.table_tbody_td}>
-                  {(item.price * item.quantity!).toFixed(2)}
+                  <div className={CLASSES.MODAL_PAGE.table_tbody_total_div}>
+                    {(item.price * item.quantity!).toFixed(2)}
+                    <span
+                      onClick={() => removeItem(item.id, "Remove")}
+                      className={CLASSES.MODAL_PAGE.table_tbody_decrease_icon}
+                    >
+                      delete
+                    </span>
+                  </div>
                 </td>
               </tr>
             );
@@ -120,6 +154,11 @@ const CartModal: React.FC = () => {
       </div>
       {screenWidth > 640 && tableDesigns.desktopDesign}
       {screenWidth < 640 && tableDesigns.mobileDesign}
+      {totalCartItems === 0 && (
+        <p className={CLASSES.MODAL_PAGE.empty_card_p}>
+          Add Something to Show Here!
+        </p>
+      )}
     </Modal>
   );
 };

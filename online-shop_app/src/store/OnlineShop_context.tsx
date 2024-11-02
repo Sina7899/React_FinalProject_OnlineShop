@@ -21,6 +21,7 @@ const OnlineShopContexts = createContext<ContextsObj<Product[]>>({
   initialFetchedProducts: [],
   items: [],
   addItem: () => undefined as unknown as CartItemType[],
+  removeItem: () => undefined as unknown as CartItemType[],
   totalCartItems: undefined as unknown as number,
 });
 
@@ -41,6 +42,28 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
       updatedItems.push({ ...action.item, quantity: 1 });
+    }
+
+    return { ...state, items: updatedItems };
+  }
+
+  if (action.type === "REMOVE_ITEM") {
+    const existingCartItemIndex = state.items.findIndex(
+      (item) => item.id === action.payload.id
+    );
+
+    const existingCartItem = state.items[existingCartItemIndex];
+
+    const updatedItems = [...state.items];
+
+    if (existingCartItem.quantity === 1 || action.payload.button === "Remove") {
+      updatedItems.splice(existingCartItemIndex, 1);
+    } else {
+      const updatedItem = {
+        ...existingCartItem,
+        quantity: existingCartItem.quantity! - 1,
+      };
+      updatedItems[existingCartItemIndex] = updatedItem;
     }
 
     return { ...state, items: updatedItems };
@@ -71,6 +94,10 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
     dispatchCartAction({ type: "ADD_ITEM", item });
   }
 
+  function removeItem(id: number, button: string) {
+    dispatchCartAction({ type: "REMOVE_ITEM", payload: { id, button } });
+  }
+
   const totalCartItems = cart.items.reduce((totalNumberOfItems, item) => {
     return totalNumberOfItems + item.quantity!;
   }, 0);
@@ -83,6 +110,7 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
     initialFetchedProducts: initialFetchedProducts.current,
     items: cart.items,
     addItem,
+    removeItem,
     totalCartItems,
   };
 

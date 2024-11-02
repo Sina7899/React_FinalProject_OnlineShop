@@ -1,10 +1,13 @@
 import CLASSES from "../Styles/classes";
 
-import { CartItemType } from "../models/types";
+import { CartItemComponentType } from "../models/types";
 
-const CartItem: React.FC<{ item: CartItemType; index: number }> = ({
+const CartItem: React.FC<CartItemComponentType> = ({
   item,
   index,
+  onDecrease,
+  onIncrease,
+  onRemove,
 }) => {
   return (
     <tr key={item.id}>
@@ -12,11 +15,33 @@ const CartItem: React.FC<{ item: CartItemType; index: number }> = ({
       <td className={CLASSES.MODAL_PAGE.table_tbody_td}>{item.name}</td>
       <td className={CLASSES.MODAL_PAGE.table_tbody_td}>{item.description}</td>
       <td className={CLASSES.MODAL_PAGE.table_tbody_td}>
-        {`x${item.quantity}`}
+        <div className={CLASSES.MODAL_PAGE.table_tbody_count_div_desktop}>
+          <span
+            onClick={onDecrease}
+            className={CLASSES.MODAL_PAGE.table_tbody_decrease_icon}
+          >
+            remove_shopping_cart
+          </span>
+          {`x${item.quantity}`}
+          <span
+            onClick={onIncrease}
+            className={CLASSES.MODAL_PAGE.table_tbody_increase_icon}
+          >
+            add_shopping_cart
+          </span>
+        </div>
       </td>
       <td className={CLASSES.MODAL_PAGE.table_tbody_td}>{item.price}</td>
       <td className={CLASSES.MODAL_PAGE.table_tbody_td}>
-        {(item.price * item.quantity!).toFixed(2)}
+        <div className={CLASSES.MODAL_PAGE.table_tbody_total_div}>
+          {(item.price * item.quantity!).toFixed(2)}
+          <span
+            onClick={onRemove}
+            className={CLASSES.MODAL_PAGE.table_tbody_decrease_icon}
+          >
+            delete
+          </span>
+        </div>
       </td>
     </tr>
   );

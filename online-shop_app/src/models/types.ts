@@ -37,7 +37,7 @@ interface children {
   children?: React.ReactNode;
 }
 
-type CartItem = {
+type CartItemType = {
   id: number;
   name: string;
   description: string;
@@ -51,15 +51,35 @@ interface ContextsObj<T> {
   data: T;
   setData: React.Dispatch<React.SetStateAction<T>>;
   initialFetchedProducts: T;
-  items: CartItem[];
-  addItem: (item: CartItem) => void;
+  items: CartItemType[];
+  addItem: (item: CartItemType) => void;
+  totalCartItems: number;
 }
 
 type CartState = {
-  items: CartItem[];
+  items: CartItemType[];
 };
 
-type CartAction = { type: "ADD_ITEM"; item: CartItem };
+type CartAction = { type: "ADD_ITEM"; item: CartItemType };
+
+interface ModalProps {
+  children: React.ReactNode;
+  open: boolean;
+  onClose?: () => void;
+  className?: string;
+}
+
+interface CartModalContextType {
+  progress: "cart" | "";
+  showCart: () => void;
+  hideCart: () => void;
+  screenWidth: number;
+}
+
+type TableDesigns = {
+  desktopDesign: JSX.Element;
+  mobileDesign: JSX.Element;
+};
 
 export type {
   ClassesStructure,
@@ -69,7 +89,10 @@ export type {
   Product,
   children,
   ContextsObj,
-  CartItem,
+  CartItemType,
   CartState,
   CartAction,
+  ModalProps,
+  CartModalContextType,
+  TableDesigns,
 };

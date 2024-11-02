@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useContext } from "react";
+
+import { CartModalContext } from "../store/CartModal_context";
 
 import CLASSES from "../Styles/classes";
 
@@ -18,13 +20,7 @@ function playerAvatar(userName: string, size: number) {
 }
 
 const UserInfo: React.FC = () => {
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const { screenWidth } = useContext(CartModalContext);
 
   const avatarSize = screenWidth < 640 ? 45 : 60;
 

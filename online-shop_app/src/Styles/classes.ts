@@ -43,7 +43,23 @@ const CLASSES: ClassesStructure = {
     Products_loadingOrError:
       "block h-screen text-center text-2xl p-52 font-semibold italic",
   },
-  MODAL_PAGE: {},
+  MODAL_PAGE: {
+    Modal:
+      "bg-NAV_BAR m-auto rounded-lg shadow-lg p-6 animate-fade-slide-up custom-scrollbar ",
+    closeIcon_div: " mb-4 w-100 flex justify-end",
+    closeIcon_span:
+      "material-symbols-outlined hover:text-red-600 cursor-pointer",
+    table:
+      "w-full p-5 border-dashed border-2 border-black rounded-md border-spacing-0 border-separate",
+    table_thead_th:
+      "px-1 sm:px-4 py-2 border-solid border-b-2 border-black w-[100px]",
+    table_tbody_td:
+      "px-2 py-[5px] sm:px-4 sm:py-[10px] border-solid border-b-[1px] border-[#ddd] text-sm font-thin italic text-center max-w-[40px] sm:max-w-xs truncate",
+    table_tfoot_first_td:
+      "text-end font-bold py-2 italic border-solid border-t-2 border-black",
+    table_tfoot_second_td:
+      "font-bold underline text-green-700 text-center py-2 border-solid border-t-2 border-black",
+  },
 };
 
 export default CLASSES;

@@ -10,7 +10,7 @@ import {
   Product,
   CartState,
   CartAction,
-  CartItem,
+  CartItemType,
 } from "../models/types";
 
 const OnlineShopContexts = createContext<ContextsObj<Product[]>>({
@@ -20,7 +20,8 @@ const OnlineShopContexts = createContext<ContextsObj<Product[]>>({
   setData: () => undefined as unknown as Product[],
   initialFetchedProducts: [],
   items: [],
-  addItem: () => undefined as unknown as CartItem[],
+  addItem: () => undefined as unknown as CartItemType[],
+  totalCartItems: undefined as unknown as number,
 });
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -66,9 +67,13 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
 
   const [cart, dispatchCartAction] = useReducer(cartReducer, { items: [] });
 
-  function addItem(item: CartItem) {
+  function addItem(item: CartItemType) {
     dispatchCartAction({ type: "ADD_ITEM", item });
   }
+
+  const totalCartItems = cart.items.reduce((totalNumberOfItems, item) => {
+    return totalNumberOfItems + item.quantity!;
+  }, 0);
 
   const onlineShopCtxValues: ContextsObj<Product[]> = {
     loading,
@@ -78,6 +83,7 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
     initialFetchedProducts: initialFetchedProducts.current,
     items: cart.items,
     addItem,
+    totalCartItems,
   };
 
   return (

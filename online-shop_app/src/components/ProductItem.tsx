@@ -4,7 +4,7 @@ import { useContext } from "react";
 
 import { OnlineShopContexts } from "../store/OnlineShop_context";
 
-import { ProductCardInfo, CartItem } from "../models/types";
+import { ProductCardInfo, CartItemType } from "../models/types";
 
 const ProductItem: React.FC<ProductCardInfo> = ({
   productId,
@@ -15,7 +15,7 @@ const ProductItem: React.FC<ProductCardInfo> = ({
 }) => {
   const { addItem } = useContext(OnlineShopContexts);
 
-  const cartItem: CartItem = {
+  const cartItem: CartItemType = {
     id: productId,
     name: productTitle,
     description: productDes,

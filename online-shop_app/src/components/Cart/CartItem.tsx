@@ -1,6 +1,6 @@
-import CLASSES from "../Styles/classes";
+import CLASSES from "../../Styles/classes";
 
-import { CartItemComponentType } from "../models/types";
+import { CartItemComponentType } from "../../models/types";
 
 const CartItem: React.FC<CartItemComponentType> = ({
   item,

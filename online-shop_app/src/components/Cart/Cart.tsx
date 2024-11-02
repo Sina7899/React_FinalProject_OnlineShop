@@ -1,9 +1,9 @@
-import CLASSES from "../Styles/classes";
+import CLASSES from "../../Styles/classes";
 
 import { useContext } from "react";
 
-import { OnlineShopContexts } from "../store/OnlineShop_context";
-import { CartModalContext } from "../store/CartModal_context";
+import { OnlineShopContexts } from "../../store/OnlineShop_context";
+import { CartModalContext } from "../../store/CartModal_context";
 
 const Cart: React.FC = () => {
   const { totalCartItems } = useContext(OnlineShopContexts);

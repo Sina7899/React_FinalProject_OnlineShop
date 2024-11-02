@@ -1,7 +1,7 @@
 import CLASSES from "../Styles/classes";
 
 import UserInfo from "./UserInfo";
-import Cart from "./Cart";
+import Cart from "./Cart/Cart";
 
 import Logo from "../assets/images/Logo.png";
 

@@ -1,12 +1,12 @@
-import CLASSES from "../Styles/classes";
+import CLASSES from "../../Styles/classes";
 
 import { useContext } from "react";
 
-import { OnlineShopContexts } from "../store/OnlineShop_context";
+import { OnlineShopContexts } from "../../store/OnlineShop_context";
 
-import ProductItem from "../components/ProductItem";
+import ProductItem from "./ProductItem";
 
-import { Product } from "../models/types";
+import { Product } from "../../models/types";
 
 const Products: React.FC = () => {
   const { loading, error, data: productsInfo } = useContext(OnlineShopContexts);

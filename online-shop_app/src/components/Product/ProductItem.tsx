@@ -1,10 +1,10 @@
-import CLASSES from "../Styles/classes";
+import CLASSES from "../../Styles/classes";
 
 import { useContext } from "react";
 
-import { OnlineShopContexts } from "../store/OnlineShop_context";
+import { OnlineShopContexts } from "../../store/OnlineShop_context";
 
-import { ProductCardInfo, CartItemType } from "../models/types";
+import { ProductCardInfo, CartItemType } from "../../models/types";
 
 const ProductItem: React.FC<ProductCardInfo> = ({
   productId,
@@ -30,7 +30,7 @@ const ProductItem: React.FC<ProductCardInfo> = ({
     <div className={CLASSES.MAIN_PAGE.ProductItem_first_div}>
       <img
         src={productImage}
-        alt="Product Image"
+        alt="Product"
         className={CLASSES.MAIN_PAGE.ProductItem_img}
       />
       <div className={CLASSES.MAIN_PAGE.ProductItem_second_div}>

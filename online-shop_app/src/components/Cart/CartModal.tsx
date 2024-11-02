@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 
-import { CartModalContext } from "../store/CartModal_context";
-import { OnlineShopContexts } from "../store/OnlineShop_context";
+import { CartModalContext } from "../../store/CartModal_context";
+import { OnlineShopContexts } from "../../store/OnlineShop_context";
 
-import Modal from "./Modal";
+import Modal from "../Modal";
 import CartItem from "./CartItem";
 
-import CLASSES from "../Styles/classes";
+import CLASSES from "../../Styles/classes";
 
-import { TableDesigns } from "../models/types";
+import { TableDesigns } from "../../models/types";
 
 const CartModal: React.FC = () => {
   const { progress, hideCart, screenWidth } = useContext(CartModalContext);

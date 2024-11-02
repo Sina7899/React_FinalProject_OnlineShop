@@ -7,8 +7,8 @@ import NavBar from "../components/NavBar";
 import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import CategorySelect from "../components/CategorySelect";
-import Products from "../components/Products";
-import CartModal from "../components/CartModal";
+import Products from "../components/Product/Products";
+import CartModal from "../components/Cart/CartModal";
 
 const MainPage: React.FC = () => {
   return (

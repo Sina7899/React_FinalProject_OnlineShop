@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo, useCallback } from "react";
 
 import { CartModalContext } from "../../store/CartModal_context";
 import { OnlineShopContexts } from "../../store/OnlineShop_context";
@@ -15,13 +15,14 @@ const CartModal: React.FC = () => {
   const { items, addItem, removeItem, totalCartItems } =
     useContext(OnlineShopContexts);
 
-  function handleCloseCart() {
-    hideCart();
-  }
+  const handleCloseCart = useCallback(() => hideCart(), [hideCart]);
 
-  const cartTotalCost = items.reduce((totalCost, item) => {
-    return totalCost + item.quantity! * item.price;
-  }, 0);
+  const cartTotalCost = useMemo(() => {
+    return items.reduce(
+      (totalCost, item) => totalCost + item.quantity! * item.price,
+      0
+    );
+  }, [items]);
 
   const tableDesigns: TableDesigns = {
     desktopDesign: (

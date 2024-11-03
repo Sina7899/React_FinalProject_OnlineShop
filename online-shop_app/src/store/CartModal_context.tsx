@@ -1,4 +1,10 @@
-import { createContext, useState, useEffect } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+} from "react";
 
 import { CartModalContextType, children } from "../models/types";
 
@@ -12,13 +18,8 @@ const CartModalContext = createContext<CartModalContextType>({
 const CartModalContextProvider: React.FC<children> = ({ children }) => {
   const [modalProgress, setModalProgress] = useState<"cart" | "">("");
 
-  function showCart() {
-    setModalProgress("cart");
-  }
-
-  function hideCart() {
-    setModalProgress("");
-  }
+  const showCart = useCallback(() => setModalProgress("cart"), []);
+  const hideCart = useCallback(() => setModalProgress(""), []);
 
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
@@ -28,12 +29,15 @@ const CartModalContextProvider: React.FC<children> = ({ children }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const CartModalCtx: CartModalContextType = {
-    progress: modalProgress,
-    showCart,
-    hideCart,
-    screenWidth,
-  };
+  const CartModalCtx: CartModalContextType = useMemo(
+    () => ({
+      progress: modalProgress,
+      showCart,
+      hideCart,
+      screenWidth,
+    }),
+    [modalProgress, showCart, hideCart, screenWidth]
+  );
 
   return (
     <CartModalContext.Provider value={CartModalCtx}>

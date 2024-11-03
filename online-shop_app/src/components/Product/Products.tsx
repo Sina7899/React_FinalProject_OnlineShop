@@ -9,7 +9,12 @@ import ProductItem from "./ProductItem";
 import { Product } from "../../models/types";
 
 const Products: React.FC = () => {
-  const { loading, error, data: productsInfo } = useContext(OnlineShopContexts);
+  const {
+    loading,
+    error,
+    data: productsInfo,
+    addItem,
+  } = useContext(OnlineShopContexts);
 
   if (loading)
     return (
@@ -37,7 +42,13 @@ const Products: React.FC = () => {
           productDes: product.description,
           productPrice: product.price,
         };
-        return <ProductItem key={product.id} {...productCardInfo} />;
+        return (
+          <ProductItem
+            key={product.id}
+            {...productCardInfo}
+            addItem={addItem}
+          />
+        );
       })}
     </div>
   );

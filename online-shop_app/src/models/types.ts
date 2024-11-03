@@ -17,6 +17,7 @@ interface ProductCardInfo {
   productTitle: string;
   productDes: string;
   productPrice: number;
+  addItem: (cartItem: CartItemType) => void;
 }
 
 interface Product {

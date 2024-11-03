@@ -1,4 +1,11 @@
-import { createContext, useRef, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useRef,
+  useEffect,
+  useReducer,
+  useMemo,
+  useCallback,
+} from "react";
 
 import useFetch from "../hooks/useFetch";
 
@@ -90,29 +97,43 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
 
   const [cart, dispatchCartAction] = useReducer(cartReducer, { items: [] });
 
-  function addItem(item: CartItemType) {
+  const addItem = useCallback((item: CartItemType) => {
     dispatchCartAction({ type: "ADD_ITEM", item });
-  }
+  }, []);
 
-  function removeItem(id: number, button: string) {
+  const removeItem = useCallback((id: number, button: string) => {
     dispatchCartAction({ type: "REMOVE_ITEM", payload: { id, button } });
-  }
+  }, []);
 
-  const totalCartItems = cart.items.reduce((totalNumberOfItems, item) => {
-    return totalNumberOfItems + item.quantity!;
-  }, 0);
+  const totalCartItems = useMemo(() => {
+    return cart.items.reduce((totalNumberOfItems, item) => {
+      return totalNumberOfItems + item.quantity!;
+    }, 0);
+  }, [cart.items]);
 
-  const onlineShopCtxValues: ContextsObj<Product[]> = {
-    loading,
-    error,
-    data: products,
-    setData: setProducts,
-    initialFetchedProducts: initialFetchedProducts.current,
-    items: cart.items,
-    addItem,
-    removeItem,
-    totalCartItems,
-  };
+  const onlineShopCtxValues: ContextsObj<Product[]> = useMemo(
+    () => ({
+      loading,
+      error,
+      data: products,
+      setData: setProducts,
+      initialFetchedProducts: initialFetchedProducts.current,
+      items: cart.items,
+      addItem,
+      removeItem,
+      totalCartItems,
+    }),
+    [
+      loading,
+      error,
+      products,
+      setProducts,
+      cart.items,
+      addItem,
+      removeItem,
+      totalCartItems,
+    ]
+  );
 
   return (
     <OnlineShopContexts.Provider value={onlineShopCtxValues}>

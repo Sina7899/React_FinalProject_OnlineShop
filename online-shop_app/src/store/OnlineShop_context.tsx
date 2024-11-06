@@ -5,6 +5,7 @@ import {
   useReducer,
   useMemo,
   useCallback,
+  useState,
 } from "react";
 
 import useFetch from "../hooks/useFetch";
@@ -30,6 +31,10 @@ const OnlineShopContexts = createContext<ContextsObj<Product[]>>({
   addItem: () => undefined as unknown as CartItemType[],
   removeItem: () => undefined as unknown as CartItemType[],
   totalCartItems: undefined as unknown as number,
+  selectedCategory: undefined as unknown as string,
+  setSelectedCategory: () => undefined as unknown as string,
+  searchedValue: undefined as unknown as string,
+  setSearchedValue: () => undefined as unknown as string,
 });
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -111,6 +116,10 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
     }, 0);
   }, [cart.items]);
 
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const [searchedValue, setSearchedValue] = useState<string>("");
+
   const onlineShopCtxValues: ContextsObj<Product[]> = useMemo(
     () => ({
       loading,
@@ -122,6 +131,10 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
       addItem,
       removeItem,
       totalCartItems,
+      selectedCategory,
+      setSelectedCategory,
+      searchedValue,
+      setSearchedValue,
     }),
     [
       loading,
@@ -132,6 +145,10 @@ const OnlineShopContextProvider: React.FC<children> = ({ children }) => {
       addItem,
       removeItem,
       totalCartItems,
+      selectedCategory,
+      setSelectedCategory,
+      searchedValue,
+      setSearchedValue,
     ]
   );
 

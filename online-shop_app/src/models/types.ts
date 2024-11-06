@@ -64,6 +64,10 @@ interface ContextsObj<T> {
   addItem: (item: CartItemType) => void;
   removeItem: (id: number, button: string) => void;
   totalCartItems: number;
+  selectedCategory: string;
+  setSelectedCategory: React.Dispatch<React.SetStateAction<string>>;
+  searchedValue: string;
+  setSearchedValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 type CartState = {

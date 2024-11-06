@@ -1,18 +1,21 @@
 import CLASSES from "../Styles/classes";
 
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
 import { OnlineShopContexts } from "../store/OnlineShop_context";
 
 import { Product } from "../models/types";
 
-const CategorySelect: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+import { categoryLogic, searchLogic } from "../utils/searchAndCategory";
 
+const CategorySelect: React.FC = () => {
   const {
     data: fetchedProducts,
     setData: setProducts,
     initialFetchedProducts,
+    selectedCategory,
+    setSelectedCategory,
+    searchedValue,
   } = useContext(OnlineShopContexts);
 
   let products: Product[] = [...initialFetchedProducts];
@@ -27,20 +30,41 @@ const CategorySelect: React.FC = () => {
     }
 
     if (category === "All") {
-      setProducts(initialFetchedProducts);
-    } else {
-      const selectedCategory = products.filter(
-        (product) => product.category.toLowerCase() === category.toLowerCase()
-      );
-      setProducts(selectedCategory);
-    }
-  }
+      let selectedCategory = [...initialFetchedProducts];
 
-  if (
-    products.length === fetchedProducts.length &&
-    selectedCategory !== "All"
-  ) {
-    setSelectedCategory("All");
+      //if user set category to "all" on first select because of previous reason that mentioned on last comment.
+      if (initialFetchedProducts.length === 0) {
+        selectedCategory = [...fetchedProducts];
+      }
+
+      if (searchedValue) {
+        const searchResultsByCategory = searchLogic(
+          selectedCategory,
+          searchedValue
+        );
+
+        if (searchResultsByCategory) {
+          setProducts(searchResultsByCategory);
+        }
+      } else {
+        setProducts(selectedCategory);
+      }
+    } else {
+      const selectedCategory = categoryLogic(products, category);
+
+      if (searchedValue) {
+        const searchResultsByCategory = searchLogic(
+          selectedCategory,
+          searchedValue
+        );
+
+        if (searchResultsByCategory) {
+          setProducts(searchResultsByCategory);
+        }
+      } else {
+        setProducts(selectedCategory);
+      }
+    }
   }
 
   return (

@@ -6,6 +6,8 @@ import { OnlineShopContexts } from "../store/OnlineShop_context";
 
 import { Product } from "../models/types";
 
+import { searchLogic, categoryLogic } from "../utils/searchAndCategory";
+
 const SearchBar: React.FC = () => {
   const lastChange = useRef<NodeJS.Timeout | null>(null);
 
@@ -13,10 +15,14 @@ const SearchBar: React.FC = () => {
     data: fetchedProducts,
     setData: setProducts,
     initialFetchedProducts,
+    selectedCategory,
+    searchedValue,
+    setSearchedValue,
   } = useContext(OnlineShopContexts);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const searchedValue = event.target.value;
+    setSearchedValue(searchedValue);
 
     if (lastChange.current) {
       clearTimeout(lastChange.current);
@@ -29,19 +35,19 @@ const SearchBar: React.FC = () => {
       products = [...fetchedProducts];
     }
 
+    if (selectedCategory !== "All" && selectedCategory) {
+      products = categoryLogic([...initialFetchedProducts], selectedCategory);
+    } else if (selectedCategory === "All") {
+      products = [...initialFetchedProducts];
+    }
+
     lastChange.current = setTimeout(() => {
-      if (searchedValue === "") {
-        setProducts(products);
-      } else {
-        const searchResults = products.filter((product) =>
-          product.title.toLowerCase().includes(searchedValue.toLowerCase())
-        );
-        if (searchResults.length === 0) {
-          alert("Nothing Found!");
-          return;
-        }
-        setProducts(searchResults);
+      const searchResults = searchLogic(products, searchedValue);
+
+      if (searchResults) {
+        setProducts([...searchResults]);
       }
+
       lastChange.current = null;
     }, 500);
   }
@@ -49,6 +55,7 @@ const SearchBar: React.FC = () => {
   return (
     <div className={CLASSES.MAIN_PAGE.SearchBar_div}>
       <input
+        value={searchedValue}
         type="search"
         placeholder="Search Title of Something..."
         className={CLASSES.MAIN_PAGE.SearchBar_input}

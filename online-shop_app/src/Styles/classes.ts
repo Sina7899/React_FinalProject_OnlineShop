@@ -18,14 +18,14 @@ const CLASSES: ClassesStructure = {
     main_searchAndCategory_section:
       "flex flex-col justify-center items-center gap-3 sm:justify-around sm:flex-row w-full",
     SearchBar_div:
-      "flex rounded-md border border-blue-500 overflow-hidden w-[400px] sm:w-[448px]",
+      "flex rounded-md border border-blue-500 overflow-hidden w-[325px] sm:w-[448px]",
     SearchBar_input:
       "w-full outline-none bg-white text-gray-600 text-sm px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition",
     SearchBar_button:
       "flex items-center justify-center bg-[#007bff] px-5 cursor-not-allowed",
     SearchBar_svg: "fill-white",
     CategorySelect_select:
-      "rounded-md border border-blue-500 overflow-hidden w-[400px] sm:w-[448px] px-4 py-[9px] custom-select-downArrow",
+      "rounded-md border border-blue-500 overflow-hidden w-[325px] sm:w-[448px] px-4 py-[9px] custom-select-downArrow",
     Products:
       "grid gap-2 sm:gap-8 lg:gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 py-8 sm:py-12 mx-auto w-fit",
     ProductItem_first_div:
